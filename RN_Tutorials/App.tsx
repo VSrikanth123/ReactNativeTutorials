@@ -1,9 +1,59 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Button,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 function App(): JSX.Element {
+  const [counter, setCounter] = useState(40);
+  const [disableButton, setDisableButton] = useState(false);
+
+  const onClickButton = () => {
+    let currentCounter = counter;
+
+    setCounter(currentCounter + 1);
+    if (currentCounter > 50) setDisableButton(true);
+    else setDisableButton(false);
+  };
+
   return (
     <View style={styles.container}>
+      <Text style={styles.bigText}>{counter}</Text>
+
+      <Button
+        title="Click Me"
+        color="#841584"
+        onPress={onClickButton}
+        disabled={false}></Button>
+
+      <TouchableOpacity
+        style={{
+          alignItems: 'center',
+          padding: 50,
+          margin: 20,
+          backgroundColor: '#DDDDDD',
+        }}
+        onPress={onClickButton}
+        activeOpacity={0.5}>
+        <Text style={styles.bigText}>Click Me</Text>
+      </TouchableOpacity>
+
+      <Pressable
+        style={{
+          alignItems: 'center',
+          padding: 20,
+          margin: 20,
+          backgroundColor: 'green',
+        }}
+        onLongPress={onClickButton}
+        delayLongPress={1000}>
+        <Text style={styles.bigText}>Press Me</Text>
+      </Pressable>
+
       {/* <Text style={styles.header}>Hello React Native</Text>
       <View style={styles.body}>
         <Text style={styles.boldText}>
@@ -17,7 +67,8 @@ function App(): JSX.Element {
       {/* <View style={styles.smallSqare}></View>
       <View style={styles.blueSquare}></View>
       <View style={styles.redSquare}></View> */}
-      <View style={[styles.regularSquare, {backgroundColor: 'crimson'}]}></View>
+
+      {/* <View style={[styles.regularSquare, {backgroundColor: 'crimson'}]}></View>
       <View
         style={[
           styles.regularSquare,
@@ -40,7 +91,7 @@ function App(): JSX.Element {
             left: 80,
             zIndex: 2,
           },
-        ]}></View>
+        ]}></View> */}
     </View>
   );
 }
@@ -48,13 +99,14 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
-    marginTop: 30,
+    // margin: 20,
+    // marginTop: 30,
+    padding: 20,
     backgroundColor: 'pink',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
     // alignItems: 'stretch',
     // padding: 30,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // flexWrap: 'wrap',
   },
   regularSquare: {
